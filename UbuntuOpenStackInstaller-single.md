@@ -25,6 +25,28 @@ Version:0.9.1
 
 <!-- BREAK -->
 
+
+##コマンドについて
+
+次のように記述したコマンドはホスト上で実行します。
+
+````
+$ command
+````
+
+次のように記述したコマンドはComputeノード上で実行します。
+
+````
+Compute$ command
+````
+
+コマンドに管理権限が必要な場合はsudoコマンドをつけて実行しますが、下記のように記述しているコマンドは`sudo -i`で管理者権限に切り替えてから実行してください。
+
+````
+# command
+````
+
+
 ## 1. 構築する環境について
 
 ### 1-1 環境構築に使用するOS
@@ -98,7 +120,9 @@ OSはUbuntu Server 14.04.3 LTS(以下Ubuntu Server)を使用します。以下�
 ```
 筆者注:
 Ubuntuインストール時に選択した言語がインストール後も使われます。
-Ubuntu Serverで日本語の言語を設定した場合、標準出力や標準エラー出力が文字化けするなど様々な問題が起きますので、Ubuntu Serverでは言語として英語を設定されることを推奨します。
+Ubuntu Serverで日本語の言語を設定した場合、標準出力や標準エラー出力が文字化けするなど
+様々な問題が起きます。
+Ubuntu Serverでは言語として英語を設定されることを推奨します。
 ```
 
 
@@ -205,7 +229,7 @@ Compute$ ps ax|grep nova
 仮想マシンタイプの設定を書きかえます。Ubuntuではnova-compute.confを修正します。
 
 ````
-$ sudo vi /etc/nova/nova-compute.conf
+Compute$ sudo vi /etc/nova/nova-compute.conf
 ...
 [libvirt]
 virt_type=qemu
