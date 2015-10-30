@@ -1,11 +1,11 @@
 Title: Ubuntu OpenStack Installerを使った1Node OpenStack
 Company: 日本仮想化技術
-Version:0.9.1
+Version:0.9.2
 
 #Ubuntu OpenStack Installerを使った1Node OpenStack
 
 <div class="title">
-バージョン：0.9.1 (2015/10/28作成)<br>
+バージョン：0.9.2 (2015/10/30作成)<br>
 日本仮想化技術株式会社
 </div>
 
@@ -17,6 +17,8 @@ Version:0.9.1
 |:---|:---|:---|
 |0.9.0|2015/07/23|Kilo対応|
 |0.9.1|2015/10/28|公式サイトに合わせた修正。kilo動作確認済|
+|0.9.2|2015/10/30|削除方法の追加。juno動作確認済|
+
 
 <!-- BREAK -->
 
@@ -257,7 +259,7 @@ OpenStackはLXC Network上でノードが稼働しているため、Publicから
 
 ````
 $ sudo -i
-# iptables -t nat -A PREROUTING -p tcp -d 172.17.14.100 --dport 9000 -j DNAT --to-destination 10.0.6.227:80
+# iptables -t nat -A PREROUTING -p tcp -d 172.17.14.100 --dport 9000 -j DNAT --to-destination 10.0.6.227:443
 # service iptables-persistent save
 ````
 
@@ -266,7 +268,7 @@ $ sudo -i
 NAT転送を設定したら外部PCからOpenStack Dashboardにブラウザーでアクセスできるようになります。
 
 ````
-http://172.17.14.100:9000/horizon
+https://172.17.14.100:9000/horizon
 ````
 
 管理ユーザーとしてadminユーザー、一般ユーザーとしてubuntuユーザーが登録されています。パスワードはUbuntu OpenStack Installer実行時に最初に設定したパスワードが設定されており、それぞれを入力するとログイン可能です。
@@ -277,3 +279,12 @@ Dashboardの操作方法などは次の弊社サイトで公開されている�
 
 - <http://www.slideshare.net/VirtualTech-JP/14012703openstack-vmadd>
 - <http://enterprisecloud.jp/installguide-openstack/>
+
+<!-- BREAK -->
+
+
+## 5. OpenStackの削除
+
+Ubuntu OpenStack InstallerでデプロイしたOpenStack環境の停止は`sudo openstack-install -u`で行うことができます。
+
+エラーになり`sudo openstack-install -u`が完了しない場合は、`lxc-ls`ででできたコンテナーを`lxc-stop`で停止、`lxc-destroy`で削除した後`~/.cloud-install`を削除してください。
