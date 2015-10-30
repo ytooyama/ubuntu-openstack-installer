@@ -1,7 +1,7 @@
 # Ubuntu OpenStack Installer Single
 
 ###これはなに
-Ubuntu OpenStack InstallerのSingleモードでOpenStack環境を作る手順書のようなものです。[公式の手順](http://openstack.astokes.org/guides/single-install)をもとにしています。
+Ubuntu OpenStack InstallerのSingleモードでOpenStack環境を作る手順をまとめたものです。[公式の手順](http://openstack.astokes.org/guides/single-install)をもとにしています。
 
 ###環境について
 Ubuntu OpenStack InstallerのSingleモードは1台のマシン上にノードを構築するため、実行には次のスペックを要求しています。
@@ -22,6 +22,12 @@ OpenStack Version | 動作可否     |
 icehouse          | TBD          |       
 juno              | TBD          |      
 kilo              | OK           |       
-liberty           | ERR          |       
+liberty           | Workaround   |       
 
 ※icehouseとjunoは多分動くと思います。
+
+Libertyは`--upstream-ppa --next-charms`パラメーター付加で動作しますが、少し不安定です(10/30現在)。
+
+````
+$ sudo openstack-install --upstream-ppa --next-charms --openstack-release liberty
+````
